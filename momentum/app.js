@@ -56,12 +56,24 @@ function handleClick(){
         newColor = 'blue';
     }
     h1.style.color = newColor; */
-    const clickedClass = 'clicked';
+
+    /*
+    const clickedClass = 'clicked background-color';
     if(h1.className===clickedClass){
-        h1.className = "";
+        h1.className = "background-color";
     }else{
         h1.className = clickedClass
-    }
+    }*/
+    
+    /*
+    const clickedClass = "clicked";
+    if(h1.classList.contains(clickedClass)){
+        h1.classList.remove(clickedClass);
+    }else{
+        h1.classList.add(clickedClass);
+    }*/
+
+    h1.classList.toggle("clicked"); //있으면 삭제, 없으면 추가
 }
 function handleMouseEnter(){
     h1.innerText = "Mouse is here!";
