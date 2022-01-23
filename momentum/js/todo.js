@@ -3,38 +3,57 @@ const toDoInput = toDoForm.querySelector("input");
 const toDoList = document.querySelector("#todo-list");
 
 const TODOS_KEY = "todos"
+const CHECKED_KEY = "done";
 let toDos = [];
 
 function saveToDos(){
     localStorage.setItem(TODOS_KEY, JSON.stringify(toDos)); //전의 toDos까지 합쳐서 localStorage에 저장
 }
-function deleteToDo(event){
+function pushToDos(todoText){
+    const newToDoObj = {
+        text : todoText,
+        id : Date.now() //같은 text끼리 구분하기 위해
+    }
+    toDos.push(newToDoObj);
+    return newToDoObj;
+}
+function clickCheckBox(event){
     const li = event.target.parentElement;
-    toDos = toDos.filter((item)=>item.id!==parseInt(li.id));
-    li.remove();
-    saveToDos();
+    const span = li.querySelector("span");
+    if(event.target.checked){ //delete
+        li.className="checked"; 
+        toDos = toDos.filter((item)=>item.id!==parseInt(li.id)); //toDos 업데이트
+        li.remove();
+        span.classList.add(CHECKED_KEY);
+    }else{ //recreate
+        li.className="unchecked";
+        pushToDos(span.innerText); //toDos 업데이트
+        span.classList.remove(CHECKED_KEY);
+    }
+    toDoList.appendChild(li);
+    const checked = toDoList.querySelectorAll(".checked"); //체크된 거 다 밑으로 끌어내리기
+    checked.forEach((item)=>toDoList.appendChild(item));
+    saveToDos(); //localStorage 업데이트
 }
 function paintToDo(newToDoObj){
     const li = document.createElement("li");
     li.id = newToDoObj.id;
+    li.className = "unchecked";
     const span = document.createElement("span");
     span.innerText = newToDoObj.text;
-    const button = document.createElement("button");
-    button.innerText = "❌";
-    button.addEventListener("click", deleteToDo);
+    //span.classList.add("bold");
+    const checkBox = document.createElement("input");
+    checkBox.type="checkbox";
+    checkBox.addEventListener("click", clickCheckBox);
     li.appendChild(span);
-    li.appendChild(button);
+    li.appendChild(checkBox);
     toDoList.appendChild(li);
 }
 function handleToDoSubmit(event){
     event.preventDefault();
     const newToDo = toDoInput.value;
     toDoInput.value = "";
-    const newToDoObj = {
-        text : newToDo,
-        id : Date.now() //같은 text끼리 구분하기 위해
-    }
-    toDos.push(newToDoObj);
+    const newToDoObj = pushToDos(newToDo);
     paintToDo(newToDoObj);
     saveToDos();
 }
