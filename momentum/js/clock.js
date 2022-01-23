@@ -1,5 +1,5 @@
-const today = document.querySelector("#clock h3");
-const time = document.querySelector("#clock h2");
+const today = document.querySelector("#clock h2");
+const time = document.querySelector("#clock span");
 
 function getClock(){
     const date = new Date();

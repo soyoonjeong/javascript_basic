@@ -22,9 +22,8 @@ function onGeoOk(position){
         const spans = document.querySelectorAll("#weather span");
         const weather = document.querySelector("#weather i");
         spans[0].innerText = data.name; //city
-        spans[1].innerText = data.main.temp+"°"; //temp
-        weather.className= weatherIcon[(data.weather[0].icon).substr(0,2)];
-        //weather.src = `http://openweathermap.org/img/w/${data.weather[0].icon}.png`;
+        spans[1].innerText = Math.ceil(data.main.temp)+"°"; //temp
+        weather.className= weatherIcon[(data.weather[0].icon).substr(0,2)] +" fa-2x";
     })
 }
 function onGeoError(){

@@ -1,9 +1,6 @@
 .hidden{
     display: none;
 }
-span{
-    color:white;
-}
 .flex-box{
     display:flex;
     flex-direction: column;
@@ -12,28 +9,42 @@ span{
 }
 .row{
     flex-direction:row;
-    width:80px;
     justify-content: space-between;
+}
+.bold{
+    font-weight:bold;
+}
+.right{
+    position:fixed;
+    right:30px;
+    top : 130px;
 }
 #weather{
     position:fixed;
     top : 20px;
-    right:20px;
+    right:30px;
+}
+#temp{
+    font-size:large;
+    padding-left:10px;
 }
 #todo-list{
     list-style:none;
-    width : 300px;
+    width : 320px;
     align-items:flex-start;
     background-color: rgba(255,255,255,0.5);
-    padding : 10px;
     margin:10px 30px;
+    padding:0px;
+    border-radius :5px;
 }
 li{
     display:flex;
     width:300px;
     justify-content:space-between;
-    margin-bottom:10px;
+    padding: 10px 15px;
+    border-bottom : rgba(0,0,0,1);
 }
+
 #bg{
     position: fixed; 
     left :0;
@@ -43,14 +54,17 @@ li{
     min-width: 100%;
     min-height: 100%;
   }
-form input{
+input[type="text"]{
     padding:10px;
     opacity : 70%;
-    width : 300px;
+    text-align :center;
+    border-radius :5px;
+    border:none;
 }
-#todo-form{
-    margin-top : 30px;
+input[type="checkbox"]{
+    width:15px;
+    height:15px;
 }
-i{
-    color: white;
+.done{
+    text-decoration:line-through;
 }
